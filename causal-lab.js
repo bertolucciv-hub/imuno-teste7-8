@@ -1,3 +1,4 @@
+import {renderPlateCollection,platesFor} from './atlas-plates.js';
 export const CAUSAL_STORAGE_KEY = 'immunoverse.play.causal.v55';
 export function causalSummary(){
   try{const x=JSON.parse(localStorage.getItem(CAUSAL_STORAGE_KEY)||'{}');return {xp:Object.values(x.claimed||{}).reduce((s,v)=>s+(Number(v)||0),0),completed:Object.values(x.complete||{}).filter(Boolean).length,runs:Array.isArray(x.runs)?x.runs.length:0};}catch{return {xp:0,completed:0,runs:0};}
@@ -128,6 +129,7 @@ export function mountCausalLab({onEarn=()=>{},initialStation='c3'}={}) {
       ${ui.ran?renderResult(e,v):''}
       </div></div>
       <aside class="lab-side-stack"><div class="lab-aside-card"><div class="eyebrow">Perfil de pesquisa</div><h3>Seu progresso</h3><div class="lab-side-stat">${totalLabXP()} XP</div><p>O XP mede participação e raciocínio na bancada. Não representa avaliação acadêmica.</p><div class="lab-side-progress"><i style="width:${Math.min(100,Object.keys(ledger.complete).filter(k=>ledger.complete[k]).length/5*100)}%"></i></div><p style="margin-top:8px">${Object.keys(ledger.complete).filter(k=>ledger.complete[k]).length} de 5 competências concluídas</p></div><div class="lab-aside-card"><h3>Protocolo de investigação</h3><ol><li>Selecione a intervenção.</li><li>Registre sua hipótese causal.</li><li>Execute e compare os resultados.</li><li>Explique o elo funcional comprometido.</li><li>Resolva um caso clínico inédito.</li></ol></div><div class="lab-aside-card"><h3>Pergunta central</h3><p><strong>O que se mantém funcionando apesar da falha?</strong> Diferenciar etapas preservadas e interrompidas vale mais do que decorar o nome da molécula.</p></div></aside>`;
+    el('#lab-workspace').insertAdjacentHTML('beforeend',renderPlateCollection(platesFor('labs',e.id),{title:e.short+' · apoio visual',collapsed:true}));
     const workspace=el('#lab-workspace');
     workspace.querySelectorAll('[data-intervention]').forEach(b=>b.addEventListener('click',()=>{ui.intervention=b.dataset.intervention;ui.prediction=null;ui.ran=false;ui.clinicalChoice=null;ui.clinicalCorrect=false;ui.lastWrong=false;draw();}));
     workspace.querySelectorAll('[name="lab-prediction"]').forEach(r=>r.addEventListener('change',()=>{ui.prediction=Number(r.value);const button=el('#lab-run');if(button)button.disabled=false;}));

@@ -3,12 +3,12 @@
  * As missões e o progresso do estudante ficam no localStorage e não são enviados ao servidor.
  * Nunca retornar index.html no lugar de JavaScript/CSS: isso mascara falhas de publicação.
  */
-const CACHE = 'immunoverse-static-clinical-v5.7-atlas-integrated.2';
+const CACHE = 'immunoverse-static-clinical-v5.7-pranchas.3';
 const PREFIX = 'immunoverse-static-';
 const STATIC = [
   './', './index.html', './app.js', './style.css', './clinical.css',
   './clinical-v5.css', './clinical-v52.css', './clinical-v54.css',
-  './causal-lab.css', './causal-lab.js', './causal-view.js', './atlas-organogenesis.js', './atlas-organogenesis.css',
+  './causal-lab.css', './causal-lab.js', './causal-view.js', './atlas-organogenesis.js', './atlas-organogenesis.css', './atlas-plates.js', './atlas-plates.css',
   './curricular-drills.js', './fieldwork.js', './atlas-context.js',
   './consultation.js', './immunolab-v52.js', './doctor-profile.js',
   './semester-plan.js', './morphology.js', './content.js', './addons.js',
